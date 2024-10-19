@@ -84,6 +84,6 @@ end
 
 # TODO: improve to handle cryptocurrencies, fiat currencires and pairs other than BTC/ZAR
 puts "BTC buy transaction count: #{buy_transaction_count}"
-puts "ZAR spent: #{zar_spent}"
+puts "ZAR spent: #{'%.2f' % zar_spent}"
 puts "BTC bought: #{btc_bought}"
-puts "Average ZAR/BTC: #{zar_spent/btc_bought}"
+puts "Average ZAR/BTC: #{'%.2f' % (zar_spent/btc_bought)}"
