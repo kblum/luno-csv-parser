@@ -15,30 +15,46 @@ class Transaction
     attr_accessor :description
 
     def initialize(csv_row)
-        # "Account"
+        # "Wallet ID"
         @account_number = csv_row[0]
         # "Row"
         @row_number = csv_row[1].to_s
-        # "Timestamp"
+        # "Timestamp (UTC)"
         @timestamp = csv_row[2]
         # "Description"
         @description = csv_row[3]
         # "Currency"
         @currency = csv_row[4]
-        # "Balance Delta"
+        # "Balance delta"
         @balance_delta = csv_row[5].to_f
-        # "Available Delta"
+        # "Available balance delta"
         @available_delta = csv_row[6].to_f
         # "Balance"
         @balance = csv_row[7].to_f
-        # "Available"
+        # "Available balance"
         @available = csv_row[8].to_f
+        # "Cryptocurrency transaction ID"
+        @transaction_id = csv_row[9]
+        # "Cryptocurrency address"
+        @address = csv_row[10]
+        # "Value currency"
+        @value_currency = csv_row[11]
+        # "Value amount"
+        @value_amount = csv_row[12]
+        # "Reference"
+        @reference = csv_row[13]
     end
 
     def type
-        # TODO: implement
-        return :buy if @description.start_with? 'Bought '
-        return :sell if @description.start_with? 'Sold '
+        # TODO: support cryptocurrencies and fiat currency pairs other than BTC and ZAR
+        
+        # sample input for description: "Bought 1.23 BTC/ZAR @ 123,456"
+        return :buy if @description.match(/Bought [\d\.]+ BTC\/ZAR/)
+        # return :buy if @description.start_with? 'Bought '
+        
+        return :sell if @description.start_with? 'Sold BTC'
+        
+        return nil
     end
 
 end
@@ -61,11 +77,13 @@ csv_data_rows.each do |row|
     end
 
     if transaction.type == :sell
+        # TODO: implement
     end
 
 end
 
-puts "Buy transaction count: #{buy_transaction_count}"
+# TODO: improve to handle cryptocurrencies, fiat currencires and pairs other than BTC/ZAR
+puts "BTC buy transaction count: #{buy_transaction_count}"
 puts "ZAR spent: #{zar_spent}"
 puts "BTC bought: #{btc_bought}"
 puts "Average ZAR/BTC: #{zar_spent/btc_bought}"

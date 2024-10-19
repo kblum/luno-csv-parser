@@ -1,6 +1,8 @@
-# BitX CSV Statement Parser
+# Luno CSV Statement Parser
 
-A basic parser for [BitX](https://bitx.co.za) CSV statements.
+A basic parser script for [Luno](https://www.luno.com) (formerly [BitX](https://bitx.co.za)) CSV statements.
+
+The script currently only supports BTC/ZAR pairs.
 
 The script is written in [Ruby](https://www.ruby-lang.org) and only uses standard libraries (no additional gems are required).
 
@@ -13,7 +15,7 @@ ruby process.rb data/btc.csv
 Sample output:
 
 ```
-Buy transaction count: REDACTED
+BTC buy transaction count: REDACTED
 ZAR spent: REDACTED
 BTC bought: REDACTED
 Average ZAR/BTC: REDACTED
